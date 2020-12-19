@@ -40,3 +40,25 @@ CREATE TABLE response_like(
     CONSTRAINT fk_response_like_response 
     FOREIGN KEY(response_id) REFERENCES response(id),
 );
+
+
+TRUNCATE TABLE app_user,response_like,response, question;
+
+CREATE TABLE category(
+    id SERIAL PRIMARY KEY,
+    title INT NOT NULL
+);
+
+INSERT INTO category(title) values('SCIENCE');
+
+ALTER TABLE question ADD category_id int;
+ALTER TABLE question ADD CONSTRAINT fk_question_category FOREIGN KEY(category_id) references category(id);
+
+ALTER TABLE category
+ALTER COLUMN title  TYPE varchar(255);
+
+ALTER TABLE app_user
+ADD isAdmin character(1);
+
+
+INSERT INTO app_user (first_name, last_name, email, password, isAdmin) values ('John', 'Brown', 'john@test.com', 'pass', 't');
