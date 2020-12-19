@@ -10,10 +10,12 @@ app.use(cors())
 
 // Import Routes
 const questionsRoute = require("./routes/questions");
+const authRoute = require("./routes/auth");
 
 
 // Route Middlewares
 app.use("/api/questions", questionsRoute);
+app.use("/api/auth", authRoute);
 
 
 module.exports = app
