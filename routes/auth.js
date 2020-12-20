@@ -63,7 +63,7 @@ router.post("/register", async (req, res) => {
       email,
     ]);
     if (isUnique.rows[0]) {
-      return res.status(400).send({ message: "Email address taken" });
+      return res.status(409).send({ message: "Email address taken" });
     }
 
     // Hash password
@@ -94,8 +94,10 @@ router.post("/register", async (req, res) => {
 
 router.post("/login", async (req, res) => {
   try {
+
     const { error, value } = loginValidation(req.body);
     if (error) return res.status(400).send(error);
+
 
     const { email, password } = value;
 
@@ -151,7 +153,7 @@ const generateAccessAndRefreshToken = (user) => {
     },
     process.env.ACCESS_TOKEN_SECRET,
     {
-      expiresIn: "15m",
+      //expiresIn: "15m",
     }
   );
   const refreshToken = jwt.sign(
