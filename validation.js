@@ -33,6 +33,15 @@ const createCategoryValidation = (data) => {
     return schema.validate(data)
 }
 
+const createResponseValidation = (data) => {
+    const schema = Joi.object({
+        questionId: Joi.number().required(),
+        title: Joi.string().required(),
+        description: Joi.string().required()
+    })
+    return schema.validate(data)
+}
+
 // Registration
 const registerValidation = (data) => {
     const schema = Joi.object({
@@ -59,3 +68,4 @@ module.exports.loginValidation = loginValidation;
 module.exports.extendSessionValidation = extendSessionValidation;
 module.exports.createCategoryValidation = createCategoryValidation;
 module.exports.questionSearchValidation = questionSearchValidation;
+module.exports.createResponseValidation = createResponseValidation;
